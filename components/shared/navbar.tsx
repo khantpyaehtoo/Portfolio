@@ -80,8 +80,8 @@ export default function Navbar({ show }: { show?: boolean }) {
                         <button
                             className={`py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
                                 isScrolled
-                                    ? "bg-white text-black hover:bg-amber-300"
-                                    : "bg-white text-black border-2 border-blue-400 "
+                                    ? "bg-white text-black border border-blue-400 "
+                                    : "bg-white text-black border border-blue-400 "
                             }`}
                         >
                             Contact
