@@ -22,16 +22,18 @@ export default function Hero({ show }: { show?: boolean }) {
             ref={ref}
             className="min-h-screen flex justify-center items-center opacity-0 invisible relative"
         >
-            <div className="absolute top-40 right-20 ">
+            {/* <div className="absolute top-40 right-20 ">
                 <button className="text-3xl font-bold border-2 border-amber-200 p-3 rounded-full text-black bg-white cursor-pointer">
                     Download CV
                 </button>
-            </div>
+            </div> */}
             <div className="space-y-4">
-                <h1 className="text-xs text-center">Hello, I'm</h1>
-                <div className="border border-amber-200 p-8">
-                    <h1 className="text-3xl font-bold">Eric Rebillet</h1>
-                </div>
+                <h1 className="text-xl text-start font-crafty">
+                    Hi , It&apos;s me
+                </h1>
+                <h1 className="text-7xl font-bold font-doppio">
+                    Khant Pyae Htoo
+                </h1>
             </div>
         </div>
     );

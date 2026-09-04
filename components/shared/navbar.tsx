@@ -44,9 +44,9 @@ export default function Navbar({ show }: { show?: boolean }) {
             >
                 <div className="flex justify-between items-center text-black">
                     <h1
-                        className={`font-bold transition-colors duration-300 text-white`}
+                        className={`font-bold transition-colors duration-300 text-white font-doppio`}
                     >
-                        Eric Rebillet
+                        Khant Pyae Htoo
                     </h1>
 
                     <div

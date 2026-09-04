@@ -23,16 +23,23 @@ export default function Home() {
                 <Hero show={isIntroFinished} />
 
                 <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-bold">About</h1>
+                    <h1 className="text-4xl font-medium text-center font-crafty">
+                        about me !
+                    </h1>
+                    <p></p>
                 </section>
                 <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-bold">Works</h1>
+                    <h1 className="text-4xl font-medium text-center font-crafty">
+                        Works
+                    </h1>
                 </section>
-                <section className="min-h-screen p-10">
+                {/* <section className="min-h-screen p-10">
                     <h1 className="text-4xl font-bold">Playground</h1>
-                </section>
+                </section> */}
                 <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-bold">Contact</h1>
+                    <h1 className="text-4xl font-medium text-center font-crafty">
+                        Contact
+                    </h1>
                 </section>
             </main>
 

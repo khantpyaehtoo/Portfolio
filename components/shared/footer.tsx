@@ -56,10 +56,13 @@ export default function Footer({ show }: FooterProps) {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 flex-1">
                             <div className="space-y-3">
                                 <h2 className="text-2xl font-bold tracking-tight">
-                                    Eric Rebillet
+                                    Khant Pyae Htoo
                                 </h2>
                                 <p className="text-gray-400 text-sm">
-                                    &copy; 2026 August. Created by Eric
+                                    &copy; 2026 August. Built by{" "}
+                                    <span className="font-crafty text-sm text-amber-300 font-normal">
+                                        khant pyae htoo
+                                    </span>
                                 </p>
                             </div>
 
