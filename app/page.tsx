@@ -5,6 +5,12 @@ import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import Hero from "@/components/shared/hero";
 import IntroAnimation from "@/components/shared/introAnimation";
+import AboutSection from "@/components/shared/aboutme";
+import ContactSection from "@/components/shared/contact";
+import GoodToKnowSection from "@/components/shared/faq";
+// import WorkSection from "@/components/shared/works";
+import StickyWorkSection from "@/components/shared/work";
+// import TechStackSection from "@/components/shared/techStack";
 
 export default function Home() {
     const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -22,25 +28,13 @@ export default function Home() {
             <main>
                 <Hero show={isIntroFinished} />
 
-                <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-medium text-center font-crafty">
-                        about me !
-                    </h1>
-                    <p></p>
-                </section>
-                <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-medium text-center font-crafty">
-                        Works
-                    </h1>
-                </section>
-                {/* <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-bold">Playground</h1>
-                </section> */}
-                <section className="min-h-screen p-10">
-                    <h1 className="text-4xl font-medium text-center font-crafty">
-                        Contact
-                    </h1>
-                </section>
+                <AboutSection />
+                {/* <TechStackSection /> */}
+                <StickyWorkSection />
+                {/* <WorkSection /> */}
+
+                <GoodToKnowSection />
+                <ContactSection />
             </main>
 
             <Footer show={isIntroFinished} />
