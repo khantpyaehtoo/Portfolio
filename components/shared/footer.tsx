@@ -33,31 +33,33 @@ export default function Footer({ show }: FooterProps) {
         >
             <div className="max-w-6xl mx-auto relative">
                 {/* Main Card Container */}
-                <div className="bg-[#18191c] text-white p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl relative z-0 -mt-[1px]">
+                <div className="bg-[#141517] text-white p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl relative z-0">
                     <div className="flex flex-col md:flex-row justify-between gap-10">
                         {/* Main Grid Content */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 flex-1">
+                            {/* Brand Info */}
                             <div className="space-y-3">
-                                <h2 className="text-2xl font-bold tracking-tight">
+                                <h2 className="text-2xl font-bold tracking-tight text-white">
                                     Khant Pyae Htoo
                                 </h2>
-                                <p className="text-gray-400 text-sm">
-                                    &copy; 2026 August. Built by{" "}
-                                    <span className="font-crafty text-sm text-amber-300 font-normal">
-                                        khant pyae htoo
+                                <p className="text-gray-400 text-xs leading-relaxed">
+                                    &copy; 2026. Designed & Built by{" "}
+                                    <span className="font-mono text-amber-300 font-medium">
+                                        Khant Pyae Htoo
                                     </span>
                                 </p>
                             </div>
 
+                            {/* Quick Links */}
                             <div className="space-y-3">
-                                <h3 className="text-gray-400 text-sm font-semibold uppercase tracking-wider">
-                                    Explore
+                                <h3 className="text-amber-300 font-mono text-xs uppercase tracking-widest">
+                                    {"// Explore"}
                                 </h3>
-                                <ul className="space-y-2 text-gray-300 text-sm font-medium">
+                                <ul className="space-y-2 text-gray-300 text-xs font-medium">
                                     <li>
                                         <a
                                             href="#works"
-                                            className="hover:text-amber-300 transition-colors"
+                                            className="hover:text-amber-300 transition-colors inline-block"
                                         >
                                             Work
                                         </a>
@@ -65,7 +67,7 @@ export default function Footer({ show }: FooterProps) {
                                     <li>
                                         <a
                                             href="#about"
-                                            className="hover:text-amber-300 transition-colors"
+                                            className="hover:text-amber-300 transition-colors inline-block"
                                         >
                                             About
                                         </a>
@@ -73,7 +75,7 @@ export default function Footer({ show }: FooterProps) {
                                     <li>
                                         <a
                                             href="#playground"
-                                            className="hover:text-amber-300 transition-colors"
+                                            className="hover:text-amber-300 transition-colors inline-block"
                                         >
                                             Playground
                                         </a>
@@ -81,35 +83,48 @@ export default function Footer({ show }: FooterProps) {
                                 </ul>
                             </div>
 
+                            {/* Contact & CV */}
                             <div className="space-y-3">
-                                <h3 className="text-gray-400 text-sm font-semibold uppercase tracking-wider">
-                                    Get in touch
+                                <h3 className="text-amber-300 font-mono text-xs uppercase tracking-widest">
+                                    {"// Get in touch"}
                                 </h3>
-                                <div className="space-y-2 text-gray-300 text-sm font-medium">
-                                    <p>ericrebillet@gmail.com</p>
+                                <div className="space-y-2 text-gray-300 text-xs font-medium">
+                                    <a
+                                        href="mailto:ericrebillet@gmail.com"
+                                        className="block hover:text-amber-300 transition-colors font-mono"
+                                    >
+                                        ericrebillet@gmail.com
+                                    </a>
                                     <a
                                         href="/cv.pdf"
-                                        className="inline-block text-amber-300 hover:underline pt-2"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 text-amber-300 hover:text-amber-200 hover:underline pt-2 font-mono text-xs group"
                                     >
-                                        Download CV &rarr;
+                                        Download CV{" "}
+                                        <span className="group-hover:translate-x-1 transition-transform">
+                                            &rarr;
+                                        </span>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right Vertical Social Bar */}
-                        <div className="flex flex-col items-center gap-3 pt-2 md:pl-6 border-t md:border-t-0 md:border-l border-white/10">
+                        <div className="flex md:flex-col items-center justify-center gap-3 pt-6 md:pt-0 md:pl-8 border-t md:border-t-0 md:border-l border-white/10">
                             <button
                                 onClick={scrollToTop}
-                                className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-amber-300 hover:text-white transition-all"
+                                aria-label="Scroll to top"
+                                className="w-9 h-9 rounded-full bg-amber-300 text-black flex items-center justify-center hover:bg-amber-400 hover:scale-105 active:scale-95 transition-all shadow-md"
                             >
-                                <i className="fa-solid fa-arrow-up  text-xs"></i>
+                                <i className="fa-solid fa-arrow-up text-xs"></i>
                             </button>
                             <a
                                 href="https://facebook.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                                aria-label="Facebook"
+                                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all"
                             >
                                 <i className="fa-brands fa-facebook-f text-xs"></i>
                             </a>
@@ -117,7 +132,8 @@ export default function Footer({ show }: FooterProps) {
                                 href="https://github.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                                aria-label="GitHub"
+                                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all"
                             >
                                 <i className="fa-brands fa-github text-xs"></i>
                             </a>
@@ -125,7 +141,8 @@ export default function Footer({ show }: FooterProps) {
                                 href="https://linkedin.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                                aria-label="LinkedIn"
+                                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all"
                             >
                                 <i className="fa-brands fa-linkedin-in text-xs"></i>
                             </a>
