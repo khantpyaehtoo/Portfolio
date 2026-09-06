@@ -10,7 +10,7 @@ export default function Navbar({ show }: { show?: boolean }) {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 40) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
@@ -21,72 +21,74 @@ export default function Navbar({ show }: { show?: boolean }) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useGSAP(() => {
-        if (show) {
-            gsap.to(navRef.current, {
-                autoAlpha: 1,
-                y: 0,
-                duration: 1,
-                ease: "power3.out",
-            });
-        }
-    }, [show]);
+    useGSAP(
+        () => {
+            if (show) {
+                gsap.to(navRef.current, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                });
+            }
+        },
+        { scope: navRef, dependencies: [show] },
+    );
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 flex justify-center p-4 transition-all duration-300">
+        <header className="fixed top-0 left-0 w-full z-50 flex justify-center p-4 md:p-6 pointer-events-none">
             <div
                 ref={navRef}
-                className={`transition-all duration-500 opacity-0 invisible -translate-y-5 ${
+                className={`pointer-events-auto transition-all duration-500 opacity-0 invisible -translate-y-5 bg-[#141517]/80 backdrop-blur-md border border-white/10 rounded-full shadow-2xl ${
                     isScrolled
-                        ? "w-[80%] md:w-[60%] bg-black/40 backdrop-blur-md border border-white/10 rounded-full py-3 px-8 shadow-lg"
-                        : "w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-full py-3 px-8"
+                        ? "w-full max-w-2xl py-2.5 px-6 border-white/15"
+                        : "w-full max-w-5xl py-3.5 px-8"
                 }`}
             >
-                <div className="flex justify-between items-center text-black">
-                    <h1
-                        className={`font-bold transition-colors duration-300 text-white font-doppio font`}
+                <div className="flex justify-between items-center">
+                    {/* Logo / Name */}
+                    <a
+                        href="#home"
+                        className="font-bold text-white font-doppio tracking-tight text-base md:text-lg hover:text-amber-300 transition-colors"
                     >
                         Khant Pyae Htoo
-                    </h1>
+                    </a>
 
-                    <div
-                        className={`flex items-center space-x-8 transition-colors duration-300 text-gray-300`}
-                    >
+                    {/* Navigation Links */}
+                    <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-300">
                         <a
                             href="#home"
-                            className="hover:text-amber-400 transition-colors"
+                            className="hover:text-amber-300 transition-colors"
                         >
                             Home
                         </a>
                         <a
                             href="#about"
-                            className="hover:text-amber-400 transition-colors"
+                            className="hover:text-amber-300 transition-colors"
                         >
                             About
                         </a>
                         <a
                             href="#works"
-                            className="hover:text-amber-400 transition-colors"
+                            className="hover:text-amber-300 transition-colors"
                         >
                             Works
                         </a>
                         <a
                             href="#playground"
-                            className="hover:text-amber-400 transition-colors"
+                            className="hover:text-amber-300 transition-colors"
                         >
                             Playground
                         </a>
+                    </nav>
 
-                        <button
-                            className={`py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                                isScrolled
-                                    ? "bg-white text-black border border-blue-400 "
-                                    : "bg-white text-black border border-blue-400 "
-                            }`}
-                        >
-                            Contact
-                        </button>
-                    </div>
+                    {/* Contact Button */}
+                    <a
+                        href="#contact"
+                        className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-5 py-2 rounded-full transition-all duration-200 shadow-md hover:shadow-amber-300/20"
+                    >
+                        Contact
+                    </a>
                 </div>
             </div>
         </header>
