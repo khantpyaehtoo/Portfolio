@@ -44,7 +44,10 @@ export default function GoodToKnowSection() {
     };
 
     return (
-        <section className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 relative overflow-hidden font-sans border-t border-white/5">
+        <section
+            id="faq"
+            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 relative overflow-hidden font-sans border-t border-white/5"
+        >
             {/* 1. Subtle Background Grid Pattern */}
             <div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
