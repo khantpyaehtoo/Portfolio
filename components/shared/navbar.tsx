@@ -18,7 +18,7 @@ export default function Navbar({ show }: { show?: boolean }) {
         { name: "Contact", href: "#contact", id: "contact" },
     ];
 
-    // Mobile Menu ပွင့်ချိန် နောက်က Body Scroll ခေတ္တ ပိတ်ထားခြင်း
+    // Mobile Menu Body Scroll handler
     useEffect(() => {
         if (isMobileMenuOpen) {
             document.body.style.overflow = "hidden";
@@ -70,7 +70,7 @@ export default function Navbar({ show }: { show?: boolean }) {
         return () => observer.disconnect();
     }, []);
 
-    // GSAP Animation (Desktop View Only)
+    // GSAP Animation Update for Pre-loader / Intro Sync
     useGSAP(
         () => {
             if (!navRef.current) return;
@@ -85,7 +85,16 @@ export default function Navbar({ show }: { show?: boolean }) {
                         duration: 1,
                         ease: "power3.out",
                     });
+                } else {
+                    gsap.set(navRef.current, {
+                        autoAlpha: 0,
+                        y: -20,
+                    });
                 }
+            });
+
+            mm.add("(max-width: 767px)", () => {
+                gsap.set(navRef.current, { clearProps: "all" });
             });
 
             return () => mm.revert();
@@ -93,12 +102,13 @@ export default function Navbar({ show }: { show?: boolean }) {
         { scope: navRef, dependencies: [show] },
     );
 
-    // Safe Toggle Function for Mobile and Desktop
-    const toggleMenu = () => {
+    // Toggle Handler for Mobile Menu
+    const handleToggleMenu = (e: React.MouseEvent) => {
+        e.stopPropagation();
         setIsMobileMenuOpen((prev) => !prev);
     };
 
-    // Smooth Scroll To Target
+    // Smooth Scroll Handler
     const handleScrollTo = (
         e: React.MouseEvent<HTMLAnchorElement>,
         href: string,
@@ -138,13 +148,13 @@ export default function Navbar({ show }: { show?: boolean }) {
     };
 
     return (
-        <header className="fixed top-0 left-0 w-full z-[100] flex justify-center p-4 md:p-6 pointer-events-none">
+        <header className="fixed top-0 left-0 w-full z-[100] flex justify-center p-4 md:p-6 pointer-events-auto">
             <div
                 ref={navRef}
-                className={`relative z-[101] pointer-events-auto transition-all duration-300 opacity-100 visible translate-y-0 md:opacity-0 md:invisible md:-translate-y-5 bg-[#141517] border border-white/10 rounded-3xl md:rounded-full shadow-2xl ${
+                className={`relative z-[101] w-full bg-[#141517]/80 backdrop-blur-xl border border-white/10 rounded-3xl md:rounded-full shadow-2xl transition-all duration-300 ease-in-out md:opacity-0 md:invisible md:-translate-y-5 ${
                     isScrolled
-                        ? "w-full max-w-3xl py-3 px-5 md:px-6 border-white/15"
-                        : "w-full max-w-5xl py-3 px-6 md:py-3.5 md:px-8"
+                        ? "max-w-3xl py-3 px-5 md:px-6 border-white/20 shadow-amber-500/5"
+                        : "max-w-5xl py-3 px-6 md:py-3.5 md:px-8"
                 }`}
             >
                 <div className="flex justify-between items-center">
@@ -191,36 +201,37 @@ export default function Navbar({ show }: { show?: boolean }) {
                         <a
                             href="/CV.pdf"
                             download="CV.pdf"
-                            className="hidden sm:inline-flex items-center gap-2 bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-5 py-2 rounded-full transition-all duration-200 shadow-md hover:shadow-amber-300/20 cursor-pointer"
+                            className="hidden sm:inline-flex items-center gap-2 bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-5 py-2 rounded-full transition-all duration-200 shadow-md hover:shadow-amber-300/20 cursor-pointer active:scale-95"
                         >
                             <span>Download CV</span>
                             <i className="fa-solid fa-download text-xs" />
                         </a>
 
-                        {/* Mobile Hamburger Button */}
+                        {/* 3-Bar Perfect Cross Hamburger Button */}
                         <button
                             type="button"
-                            onClick={toggleMenu}
+                            onClick={handleToggleMenu}
                             aria-label="Toggle Navigation Menu"
-                            style={{ WebkitTapHighlightColor: "transparent" }}
-                            className="md:hidden w-11 h-11 rounded-full bg-white/10 border border-white/20 flex flex-col justify-center items-center gap-1.5 text-white focus:outline-none active:scale-95 transition-transform cursor-pointer touch-manipulation relative z-[102]"
+                            className="md:hidden relative w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex flex-col justify-center items-center gap-[5px] text-white focus:outline-none active:scale-95 transition-all cursor-pointer z-[102] touch-manipulation"
                         >
                             <span
-                                className={`w-5 h-0.5 bg-white rounded-full transition-all duration-300 pointer-events-none ${
+                                className={`w-5 h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out transform origin-center ${
                                     isMobileMenuOpen
-                                        ? "rotate-45 translate-y-2 bg-amber-300"
+                                        ? "translate-y-[7px] rotate-45 bg-amber-300"
                                         : ""
                                 }`}
                             />
                             <span
-                                className={`w-5 h-0.5 bg-white rounded-full transition-all duration-300 pointer-events-none ${
-                                    isMobileMenuOpen ? "opacity-0" : ""
+                                className={`w-5 h-[2px] bg-white rounded-full transition-all duration-200 ease-in-out ${
+                                    isMobileMenuOpen
+                                        ? "opacity-0 scale-0"
+                                        : "opacity-100"
                                 }`}
                             />
                             <span
-                                className={`w-5 h-0.5 bg-white rounded-full transition-all duration-300 pointer-events-none ${
+                                className={`w-5 h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out transform origin-center ${
                                     isMobileMenuOpen
-                                        ? "-rotate-45 -translate-y-2 bg-amber-300"
+                                        ? "-translate-y-[7px] -rotate-45 bg-amber-300"
                                         : ""
                                 }`}
                             />
@@ -228,15 +239,15 @@ export default function Navbar({ show }: { show?: boolean }) {
                     </div>
                 </div>
 
-                {/* Mobile Dropdown Menu Container */}
+                {/* Modern Glassmorphic Mobile Dropdown Menu */}
                 <div
                     className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
                         isMobileMenuOpen
-                            ? "max-h-96 opacity-100 pt-4 pb-2 border-t border-white/10 mt-3"
-                            : "max-h-0 opacity-0 pt-0 pb-0 border-t-0 mt-0 pointer-events-none"
+                            ? "max-h-[350px] opacity-100 pt-4 pb-2 border-t border-white/10 mt-3"
+                            : "max-h-0 opacity-0 pt-0 pb-0 mt-0 pointer-events-none"
                     }`}
                 >
-                    <nav className="flex flex-col space-y-1">
+                    <nav className="flex flex-col space-y-1.5">
                         {navLinks.map((link) => {
                             const isActive = activeSection === link.id;
 
@@ -247,15 +258,15 @@ export default function Navbar({ show }: { show?: boolean }) {
                                     onClick={(e) =>
                                         handleScrollTo(e, link.href)
                                     }
-                                    className={`flex items-center justify-between text-base font-medium transition-colors py-3 px-4 rounded-xl cursor-pointer select-none active:bg-white/20 ${
+                                    className={`flex items-center justify-between text-base font-medium transition-all py-3 px-4 rounded-2xl cursor-pointer select-none active:scale-[0.98] ${
                                         isActive
-                                            ? "text-amber-300 font-semibold bg-white/10"
-                                            : "text-gray-200 hover:text-white hover:bg-white/5"
+                                            ? "text-amber-300 font-semibold bg-white/10 border border-white/10 shadow-inner"
+                                            : "text-gray-200 hover:text-white hover:bg-white/5 border border-transparent"
                                     }`}
                                 >
                                     <span>{link.name}</span>
                                     {isActive && (
-                                        <span className="w-2 h-2 rounded-full bg-amber-300" />
+                                        <span className="w-2 h-2 rounded-full bg-amber-300 shadow-[0_0_8px_#fcd34d]" />
                                     )}
                                 </a>
                             );
@@ -265,7 +276,7 @@ export default function Navbar({ show }: { show?: boolean }) {
                             href="/CV.pdf"
                             download="CV.pdf"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="sm:hidden flex items-center justify-center gap-2 bg-amber-300 hover:bg-amber-400 text-black font-semibold text-sm py-3 text-center rounded-xl transition-all duration-200 mt-2 cursor-pointer active:scale-95"
+                            className="sm:hidden flex items-center justify-center gap-2 bg-amber-300 hover:bg-amber-400 text-black font-semibold text-sm py-3 text-center rounded-2xl transition-all duration-200 mt-2 cursor-pointer active:scale-95 shadow-lg shadow-amber-300/10"
                         >
                             <span>Download CV</span>
                             <i className="fa-solid fa-download text-xs" />
