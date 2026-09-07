@@ -40,8 +40,8 @@ const craftygirls = Crafty_Girls({
 });
 
 export const metadata: Metadata = {
-    title: "Khant Pyae Htoo",
-    description: "Created By Khant Pyae Htoo",
+    title: "Khant Pyae Htoo | Dev",
+    description: "Crafted By Khant Pyae Htoo",
 };
 
 export default function RootLayout({
