@@ -33,3 +33,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+header, button, a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile Touch Target Fix */
+@media (max-width: 767px) {
+    button, a {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+}

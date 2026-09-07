@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import Hero from "@/components/shared/hero";
@@ -8,36 +8,46 @@ import IntroAnimation from "@/components/shared/introAnimation";
 import AboutSection from "@/components/shared/aboutme";
 import ContactSection from "@/components/shared/contact";
 import GoodToKnowSection from "@/components/shared/faq";
-// import WorkSection from "@/components/shared/works";
 import StickyWorkSection from "@/components/shared/work";
-// import TechStackSection from "@/components/shared/techStack";
 
 export default function Home() {
     const [isIntroFinished, setIsIntroFinished] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+
+            if (mobile) {
+                setIsIntroFinished(true);
+            }
+        };
+
+        checkMobile();
+    }, []);
 
     return (
-        <>
-            {!isIntroFinished && (
+        <div className="relative min-h-screen bg-[#141517] overflow-x-clip">
+            {!isIntroFinished && !isMobile && (
                 <IntroAnimation
                     onIntroComplete={() => setIsIntroFinished(true)}
                 />
             )}
 
-            <Navbar show={isIntroFinished} />
+            <Navbar show={isMobile ? true : isIntroFinished} />
 
-            <main>
-                <Hero show={isIntroFinished} />
+            <main className="relative z-10">
+                <Hero show={isMobile ? true : isIntroFinished} />
 
                 <AboutSection />
-                {/* <TechStackSection /> */}
                 <StickyWorkSection />
-                {/* <WorkSection /> */}
 
                 <GoodToKnowSection />
                 <ContactSection />
             </main>
 
-            <Footer show={isIntroFinished} />
-        </>
+            <Footer show={isMobile ? true : isIntroFinished} />
+        </div>
     );
 }
