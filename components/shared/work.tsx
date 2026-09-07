@@ -47,7 +47,7 @@ const projects: Project[] = [
         description:
             "A modern, responsive, and efficient Booking and Staff Management System built with React, Vite, Ant Design, and RTK Query. Designed for beauty salons and appointment-based businesses.",
         tags: ["React", "antd", "Tailwind v4", "redux-toolkit", "chartjs-2"],
-        link: "#",
+        link: "https://mari-management-system.vercel.app",
         github: "https://github.com/khantpyaehtoo/Mari-Management-System",
         imageBg: "from-pink-900/40 to-black",
         images: ["/mari-dashboard.png", "/mari-dashboard1.png"],
@@ -59,7 +59,7 @@ const projects: Project[] = [
         description:
             "Apex Academy web app featuring smooth GSAP animations and responsive design.",
         tags: ["React", "GSAP", "Tailwind v4", "VITE"],
-        link: "#",
+        link: "https://apex-academy-sand.vercel.app",
         github: "https://github.com/Apex-Academy",
         imageBg: "from-blue-900/40 to-black",
         images: ["/apex-academy.png"],
