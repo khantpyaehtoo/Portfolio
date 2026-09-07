@@ -47,6 +47,7 @@ export default function Hero({ show }: { show?: boolean }) {
     return (
         <section
             ref={sectionRef}
+            id="home"
             className="w-full min-h-screen relative overflow-hidden bg-[#0a0a0a] flex items-center justify-center font-sans"
         >
             {/* 1. Base Subtle Radial Dots Background (Full Screen) */}
