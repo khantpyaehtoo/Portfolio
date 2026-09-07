@@ -93,7 +93,7 @@ export default function Footer({ show }: FooterProps) {
                                         href="mailto:ericrebillet@gmail.com"
                                         className="block hover:text-amber-300 transition-colors font-mono"
                                     >
-                                        ericrebillet@gmail.com
+                                        khantpyaehtoo.dev@gmail.com
                                     </a>
                                     <a
                                         href="/cv.pdf"
@@ -120,7 +120,7 @@ export default function Footer({ show }: FooterProps) {
                                 <i className="fa-solid fa-arrow-up text-xs"></i>
                             </button>
                             <a
-                                href="https://facebook.com"
+                                href="https://facebook.com/khantpyae.00"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
@@ -129,7 +129,7 @@ export default function Footer({ show }: FooterProps) {
                                 <i className="fa-brands fa-facebook-f text-xs"></i>
                             </a>
                             <a
-                                href="https://github.com"
+                                href="https://github.com/khantpyaehtoo"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="GitHub"
@@ -138,7 +138,7 @@ export default function Footer({ show }: FooterProps) {
                                 <i className="fa-brands fa-github text-xs"></i>
                             </a>
                             <a
-                                href="https://linkedin.com"
+                                href="https://linkedin.com/khantpyaehtoo"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"

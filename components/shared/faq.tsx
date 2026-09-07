@@ -135,9 +135,9 @@ export default function GoodToKnowSection() {
                                                         href="mailto:ericrebillet@gmail.com"
                                                         className="text-amber-300 underline underline-offset-4 hover:text-amber-200 transition-colors"
                                                     >
-                                                        ericrebillet@gmail.com
+                                                        khantpyaehtoo.dev@gmail.com
                                                     </a>
-                                                    . I'll get back to you
+                                                    . I&apos;ll get back to you
                                                     within 24-48 hours!
                                                 </>
                                             ) : (

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 export default function ContactSection() {
     const [copied, setCopied] = useState(false);
-    const email = "ericrebillet@gmail.com";
+    const email = "khantpyaehtoo.dev@gmail.com";
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText(email);
@@ -77,7 +77,7 @@ export default function ContactSection() {
 
                     {/* Telegram / Fast Chat Card */}
                     <a
-                        href="https://t.me"
+                        href="https://t.me/pyxis_xi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-[#141517] p-8 rounded-2xl border border-white/10 hover:border-amber-300/40 transition-all group flex flex-col justify-between space-y-6"
@@ -112,7 +112,7 @@ export default function ContactSection() {
                     </span>
                     <div className="flex flex-wrap gap-6 text-xs md:text-sm font-medium text-gray-400">
                         <a
-                            href="https://github.com"
+                            href="https://github.com/khantpyaehtoo"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
@@ -121,7 +121,7 @@ export default function ContactSection() {
                             GitHub
                         </a>
                         <a
-                            href="https://linkedin.com"
+                            href="https://linkedin.com/khantpyaehtoo"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
@@ -130,7 +130,7 @@ export default function ContactSection() {
                             LinkedIn
                         </a>
                         <a
-                            href="https://facebook.com"
+                            href="https://facebook.com/khantpyae.00"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
