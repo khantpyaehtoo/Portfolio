@@ -51,7 +51,10 @@ const projects: Project[] = [
 
 export default function StickyWorkSection() {
     return (
-        <section className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-24 border-t border-white/5">
+        <section
+            id="works"
+            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-24 border-t border-white/5"
+        >
             <div className="max-w-5xl mx-auto space-y-16">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
