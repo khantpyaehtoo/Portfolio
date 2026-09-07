@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -12,9 +12,26 @@ export default function IntroAnimation({
     onIntroComplete,
 }: IntroAnimationProps) {
     const container = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
+    // 1. Screen Width ကို စစ်ဆေးခြင်း (Mobile / Desktop)
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768; // 768px အောက်ဆိုရင် Mobile
+            setIsMobile(mobile);
+            if (mobile && onIntroComplete) {
+                onIntroComplete(); // Mobile ဆိုရင် Intro မပြဘဲ တိုက်ရိုက် Complete လုပ်မည်
+            }
+        };
+
+        checkMobile();
+    }, [onIntroComplete]);
+
+    // 2. Desktop ဖြစ်မှသာ မူလ GSAP Timeline ကို Run မည်
     useGSAP(
         () => {
+            if (isMobile !== false) return; // Mobile ဖြစ်နေရင် (သို့) Check မပြီးသေးရင် GSAP မ run ပါ
+
             const tl = gsap.timeline({
                 onComplete: () => {
                     if (onIntroComplete) onIntroComplete();
@@ -46,8 +63,13 @@ export default function IntroAnimation({
                     ease: "expo.inOut",
                 });
         },
-        { scope: container },
+        { scope: container, dependencies: [isMobile] },
     );
+
+    // Screen Check မပြီးသေးရင် သို့မဟုတ် Mobile ဖြစ်နေရင် ဘာမှ Render မလုပ်ပါ (Animation Skip)
+    if (isMobile === null || isMobile) {
+        return null;
+    }
 
     return (
         <div ref={container} className="relative z-50 font-sans">
