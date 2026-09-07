@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -12,90 +12,78 @@ export default function IntroAnimation({
     onIntroComplete,
 }: IntroAnimationProps) {
     const container = useRef<HTMLDivElement>(null);
-    const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-    // 1. Screen Width ကို စစ်ဆေးခြင်း (Mobile / Desktop)
-    useEffect(() => {
-        const checkMobile = () => {
-            const mobile = window.innerWidth < 768; // 768px အောက်ဆိုရင် Mobile
-            setIsMobile(mobile);
-            if (mobile && onIntroComplete) {
-                onIntroComplete(); // Mobile ဆိုရင် Intro မပြဘဲ တိုက်ရိုက် Complete လုပ်မည်
-            }
-        };
-
-        checkMobile();
-    }, [onIntroComplete]);
-
-    // 2. Desktop ဖြစ်မှသာ မူလ GSAP Timeline ကို Run မည်
     useGSAP(
         () => {
-            if (isMobile !== false) return; // Mobile ဖြစ်နေရင် (သို့) Check မပြီးသေးရင် GSAP မ run ပါ
-
             const tl = gsap.timeline({
                 onComplete: () => {
                     if (onIntroComplete) onIntroComplete();
                 },
             });
 
-            // Initial State setup
+            // Initial setup for Slide overlay & Text
             gsap.set("#intro-slide", { xPercent: 0 });
-
-            tl.from(["#title-1", "#title-2", "#title-3"], {
+            gsap.set(["#title-1", "#title-2", "#title-3"], {
                 opacity: 0,
-                y: 40,
+                y: 30,
+                scale: 0.98,
+            });
+
+            // Smooth Fade-In Sequence
+            tl.to(["#title-1", "#title-2", "#title-3"], {
+                opacity: 1,
+                y: 0,
+                scale: 1,
                 duration: 0.8,
-                stagger: 0.25,
-                ease: "power3.out",
+                stagger: 0.2,
+                ease: "power2.out",
                 delay: 0.2,
             })
+                // Smooth Fade-Out Sequence
                 .to(["#title-1", "#title-2", "#title-3"], {
                     opacity: 0,
-                    y: -30,
+                    y: -20,
+                    scale: 0.98,
                     duration: 0.6,
-                    stagger: 0.15,
-                    ease: "power3.in",
-                    delay: 0.4,
+                    stagger: 0.1,
+                    ease: "power2.inOut",
+                    delay: 0.5,
                 })
+                // Slide Away Overlay
                 .to("#intro-slide", {
                     xPercent: -100,
-                    duration: 1.1,
+                    duration: 1,
                     ease: "expo.inOut",
                 });
         },
-        { scope: container, dependencies: [isMobile] },
+        { scope: container },
     );
 
-    // Screen Check မပြီးသေးရင် သို့မဟုတ် Mobile ဖြစ်နေရင် ဘာမှ Render မလုပ်ပါ (Animation Skip)
-    if (isMobile === null || isMobile) {
-        return null;
-    }
-
     return (
-        <div ref={container} className="relative z-50 font-sans">
+        <div ref={container} className="relative z-[200] font-sans">
             <div
                 id="intro-slide"
-                className="fixed inset-0 h-screen w-full bg-[#0a0a0a] text-white flex flex-col justify-center items-start px-8 md:px-20 gap-4 tracking-tight border-b border-white/10"
+                className="fixed inset-0 h-screen w-full bg-[#0a0a0a] text-white flex flex-col justify-center items-start px-6 sm:px-12 md:px-20 gap-4 tracking-tight border-b border-white/10"
             >
                 {/* Background Ambient Glow */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-                <div className="space-y-2 relative z-10 font-mono">
+                <div className="space-y-2 relative z-10 font-mono w-full max-w-4xl">
                     <span
                         id="title-1"
-                        className="block text-amber-300 text-sm md:text-base tracking-widest uppercase"
+                        className="block text-amber-300 text-xs sm:text-sm md:text-base tracking-widest uppercase"
                     >
                         {"// Khant Pyae Htoo"}
                     </span>
                     <h1
                         id="title-2"
-                        className="text-4xl md:text-7xl font-extrabold uppercase font-sans text-white"
+                        className="text-3xl sm:text-5xl md:text-7xl font-extrabold uppercase font-sans text-white leading-tight"
                     >
                         Front-End Developer
                     </h1>
                     <p
                         id="title-3"
-                        className="text-gray-400 text-sm md:text-lg font-sans"
+                        className="text-gray-400 text-xs sm:text-base md:text-lg font-sans"
                     >
                         Crafting smooth UI & full-stack web experiences.
                     </p>
