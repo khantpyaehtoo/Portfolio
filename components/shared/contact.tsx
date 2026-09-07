@@ -15,10 +15,10 @@ export default function ContactSection() {
     return (
         <section
             id="contact"
-            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 font-sans relative overflow-hidden"
+            className="min-h-[70vh] w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 font-sans relative overflow-hidden z-20 pointer-events-auto"
         >
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none -z-10" />
 
             <div className="max-w-5xl mx-auto space-y-16 relative z-10">
                 {/* Section Header */}
@@ -27,15 +27,15 @@ export default function ContactSection() {
                         {"// Get In Touch"}
                     </span>
                     <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
-                        Got something in mind? <br />
+                        Got a project in mind? <br />
                         <span className="text-gray-400">
                             Let&apos;s build together.
                         </span>
                     </h2>
                     <p className="text-gray-400 text-sm md:text-base leading-relaxed pt-2">
-                        I&apos;m always open to discussing new projects,
-                        freelance work, creative ideas, or opportunities to be
-                        part of your vision.
+                        I&apos;m currently open to full-time opportunities,
+                        freelance projects, or creative collaborations. Feel
+                        free to reach out!
                     </p>
                 </div>
 
@@ -47,23 +47,24 @@ export default function ContactSection() {
                             <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block">
                                 Direct Mail
                             </span>
-                            <h3 className="text-xl md:text-2xl font-bold font-mono text-white group-hover:text-amber-300 transition-colors">
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-white group-hover:text-amber-300 transition-colors break-all">
                                 {email}
                             </h3>
                         </div>
 
-                        <div className="flex items-center gap-4 pt-4">
+                        <div className="flex flex-wrap items-center gap-4 pt-4">
                             <a
                                 href={`mailto:${email}`}
-                                className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-6 py-2.5 rounded-lg transition-all active:scale-95 inline-flex items-center gap-2"
+                                className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-6 py-2.5 rounded-lg transition-all active:scale-95 inline-flex items-center gap-2 cursor-pointer"
                             >
                                 <span>Send Mail</span>
                                 <i className="fa-solid fa-paper-plane text-xs"></i>
                             </a>
 
                             <button
+                                type="button"
                                 onClick={handleCopyEmail}
-                                className="bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 text-xs md:text-sm px-4 py-2.5 rounded-lg transition-all active:scale-95 inline-flex items-center gap-2 font-mono"
+                                className="bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 text-xs md:text-sm px-4 py-2.5 rounded-lg transition-all active:scale-95 inline-flex items-center gap-2 font-mono cursor-pointer"
                             >
                                 <i
                                     className={`fa-regular ${copied ? "fa-check text-emerald-400" : "fa-copy"}`}
@@ -80,7 +81,7 @@ export default function ContactSection() {
                         href="https://t.me/pyxis_xi"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-[#141517] p-8 rounded-2xl border border-white/10 hover:border-amber-300/40 transition-all group flex flex-col justify-between space-y-6"
+                        className="bg-[#141517] p-8 rounded-2xl border border-white/10 hover:border-amber-300/40 transition-all group flex flex-col justify-between space-y-6 cursor-pointer"
                     >
                         <div className="space-y-2">
                             <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block">
@@ -88,12 +89,12 @@ export default function ContactSection() {
                             </span>
                             <h3 className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors flex items-center gap-2">
                                 Telegram{" "}
-                                <span className="text-xs text-amber-300 font-normal">
+                                <span className="text-xs text-amber-300 font-normal group-hover:translate-x-1 transition-transform">
                                     ➔
                                 </span>
                             </h3>
                             <p className="text-xs text-gray-400 leading-relaxed">
-                                Fast responses for casual notes & quick project
+                                Fast responses for direct messages & quick
                                 inquiries.
                             </p>
                         </div>
@@ -108,7 +109,7 @@ export default function ContactSection() {
                 {/* Social Network Links */}
                 <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-                        Social Networks
+                        Socials
                     </span>
                     <div className="flex flex-wrap gap-6 text-xs md:text-sm font-medium text-gray-400">
                         <a
@@ -121,7 +122,7 @@ export default function ContactSection() {
                             GitHub
                         </a>
                         <a
-                            href="https://linkedin.com/khantpyaehtoo"
+                            href="https://linkedin.com/in/khantpyaehtoo"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5"
