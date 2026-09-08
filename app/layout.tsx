@@ -10,6 +10,7 @@ import {
 import "./globals.css";
 import "@/components/shared/gsapProvider";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { ThemeProvider } from "@/components/themeProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -52,10 +53,17 @@ export default function RootLayout({
     return (
         <html
             lang="en"
+            suppressHydrationWarning
             className={`${geistSans.variable} ${geistMono.variable} ${doppioOne.variable} ${butterflyKid.variable} ${craftygirls.variable} h-full antialiased`}
         >
-            <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white">
-                {children}
+            <body className="min-h-full flex flex-col bg-bg-base text-text-main">
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="dark"
+                    enableSystem
+                >
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );

@@ -1,37 +1,69 @@
 @import "tailwindcss";
 
+/* Base Color Setup for Light & Dark Themes */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light Theme (#F7F9FB + #1460BA + #00CCFF) */
+  --bg-base: #F3F4FB;
+  --bg-surface: #FFFFFF;
+  --bg-surface-glass: rgba(255, 255, 255, 0.85);
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --primary: #1460BA;
+  --primary-hover: #0E4C96;
+  --accent: #00CCFF;
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-hover: rgba(20, 96, 186, 0.3);
+  --shadow-color: rgba(20, 96, 186, 0.08);
+  --primary-glow: rgba(20, 96, 186, 0.12); /* Light Mode Blue Glow */
+
+}
+
+/* Dark Theme (#0a0a0a + #141517 + #fcd34d) */
+.dark {
+  --bg-base: #0a0a0a;
+  --bg-surface: #141517;
+  --bg-surface-glass: rgba(20, 21, 23, 0.8);
+  --text-main: #FFFFFF;
+  --text-muted: #9CA3AF;
+  --primary: #FCD34D;
+  --primary-hover: #F59E0B;
+  --accent: #FCD34D;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(252, 211, 77, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --primary-glow: rgba(252, 211, 77, 0.08); /* Dark Mode Amber Glow */
+
+}
+
+/* Tailwind Theme Map */
+@theme inline {
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-glass: var(--bg-surface-glass);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-doppio: var(--font-doppio);
+  --font-butterfly: var(--font-butterfly);
+  --font-crafty: var(--font-crafty), sans-serif;
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .gsap-reveal {
   opacity: 0;
   visibility: hidden;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-doppio: var(--font-doppio), sans-serif;
-  --font-butterfly: var(--font-butterfly), sans-serif;
-  --font-crafty: var(--font-crafty), sans-serif;
-}
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 header, button, a {
@@ -44,4 +76,30 @@ header, button, a {
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
     }
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 9999px;
+    border: 2px solid var(--bg-base); /* Track  */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Firefox Scrollbar Styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) var(--bg-base);
 }

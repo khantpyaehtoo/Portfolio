@@ -111,24 +111,24 @@ export default function ContactSection() {
         <section
             id="contact"
             ref={containerRef}
-            className="min-h-[70vh] w-full bg-[#080808] text-white px-6 md:px-16 py-28 font-sans relative overflow-hidden z-20 pointer-events-auto selection:bg-amber-300 selection:text-black"
+            className="min-h-[70vh] w-full bg-bg-base text-text-main px-6 md:px-16 py-28 font-sans relative overflow-hidden z-20 pointer-events-auto selection:bg-primary selection:text-text-main border-t border-border-subtle transition-colors duration-300"
         >
             {/* Background Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] bg-primary/5 rounded-full blur-[140px] pointer-events-none -z-10" />
 
             <div className="max-w-5xl mx-auto space-y-16 relative z-10">
                 {/* Header Section */}
                 <div className="space-y-4 max-w-2xl">
-                    <span className="gtk-header-anim text-amber-300 font-mono text-xs uppercase tracking-widest block">
+                    <span className="gtk-header-anim text-primary font-mono text-xs uppercase tracking-widest block font-semibold">
                         {"// Get In Touch"}
                     </span>
-                    <h2 className="gtk-header-anim text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
+                    <h2 className="gtk-header-anim text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-text-main">
                         Got a project in mind? <br />
-                        <span className="text-gray-400 font-normal">
+                        <span className="text-text-muted font-normal">
                             Let&apos;s build together.
                         </span>
                     </h2>
-                    <p className="gtk-header-anim text-gray-400 text-sm md:text-base leading-relaxed pt-2">
+                    <p className="gtk-header-anim text-text-muted text-sm md:text-base leading-relaxed pt-2">
                         I&apos;m currently open to full-time opportunities,
                         freelance projects, or creative collaborations. Feel
                         free to reach out!
@@ -140,21 +140,21 @@ export default function ContactSection() {
                     {/* GoodToKnow Cursor Tracking Card */}
                     <div
                         ref={cardRef}
-                        className="gtk-card-anim md:col-span-2 bg-[#121212] p-8 rounded-3xl border border-white/10 hover:border-amber-300/30 transition-all duration-500 relative flex flex-col justify-between space-y-8 overflow-hidden group"
+                        className="gtk-card-anim md:col-span-2 bg-bg-surface p-8 rounded-3xl border border-border-subtle hover:border-primary/50 transition-all duration-500 relative flex flex-col justify-between space-y-8 overflow-hidden group shadow-xl"
                     >
                         {/* Dynamic Mouse Hover Glow Effect */}
                         <div
                             className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                             style={{
-                                background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(252, 211, 77, 0.08), transparent 40%)`,
+                                background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, var(--primary-glow), transparent 40%)`,
                             }}
                         />
 
                         <div className="space-y-2 relative z-10">
-                            <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block">
+                            <span className="text-xs font-mono text-text-muted uppercase tracking-wider block">
                                 Direct Mail
                             </span>
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-white group-hover:text-amber-300 transition-colors break-all">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-text-main group-hover:text-primary transition-colors break-all">
                                 {email}
                             </h3>
                         </div>
@@ -162,7 +162,7 @@ export default function ContactSection() {
                         <div className="flex flex-wrap items-center gap-4 relative z-10">
                             <a
                                 href={`mailto:${email}`}
-                                className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-xs md:text-sm px-6 py-3 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-amber-300/10"
+                                className="bg-primary hover:opacity-90 text-bg-base  font-semibold text-xs md:text-sm px-6 py-3 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-primary/10"
                             >
                                 <span>Send Mail</span>
                                 <i className="fa-solid fa-paper-plane text-xs"></i>
@@ -171,12 +171,12 @@ export default function ContactSection() {
                             <button
                                 type="button"
                                 onClick={handleCopyEmail}
-                                className="bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs md:text-sm px-5 py-3 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 inline-flex items-center gap-2 font-mono cursor-pointer backdrop-blur-md"
+                                className="bg-bg-base hover:bg-border-subtle border border-border-subtle text-text-main text-xs md:text-sm px-5 py-3 rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-95 inline-flex items-center gap-2 font-mono cursor-pointer backdrop-blur-md shadow-sm"
                             >
                                 <i
                                     className={`fa-regular ${
                                         copied
-                                            ? "fa-check text-emerald-400"
+                                            ? "fa-check text-emerald-500 dark:text-emerald-400"
                                             : "fa-copy"
                                     }`}
                                 ></i>
@@ -192,42 +192,42 @@ export default function ContactSection() {
                         href="https://t.me/pyxis_xi"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="gtk-card-anim bg-[#121212] p-8 rounded-3xl border border-white/10 hover:border-amber-300/30 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-amber-500/5 group flex flex-col justify-between space-y-6 cursor-pointer relative overflow-hidden"
+                        className="gtk-card-anim bg-bg-surface p-8 rounded-3xl border border-border-subtle hover:border-primary/50 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/5 group flex flex-col justify-between space-y-6 cursor-pointer relative overflow-hidden shadow-xl"
                     >
                         <div className="space-y-3 relative z-10">
-                            <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block">
+                            <span className="text-xs font-mono text-text-muted uppercase tracking-wider block">
                                 Quick Chat
                             </span>
-                            <h3 className="text-2xl font-bold text-white group-hover:text-amber-300 transition-colors flex items-center justify-between">
+                            <h3 className="text-2xl font-bold text-text-main group-hover:text-primary transition-colors flex items-center justify-between">
                                 Telegram{" "}
-                                <span className="text-sm text-amber-300 font-normal transform group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform duration-300">
-                                    ↗
+                                <span className="text-sm text-primary font-normal transform group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform duration-300">
+                                    <i className="fa-regular fa-paper-plane"></i>
                                 </span>
                             </h3>
-                            <p className="text-xs text-gray-400 leading-relaxed">
+                            <p className="text-xs text-text-muted leading-relaxed">
                                 Fast responses for direct messages & quick
                                 inquiries.
                             </p>
                         </div>
 
-                        <div className="text-xs font-mono text-gray-400 group-hover:text-white transition-colors flex items-center gap-1.5 relative z-10">
+                        <div className="text-xs font-mono text-text-muted group-hover:text-text-main transition-colors flex items-center gap-1.5 relative z-10">
                             <span>Open Telegram</span>
-                            <i className="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            <i className="fa-solid fa-paper-plane text-[10px]"></i>
                         </div>
                     </a>
                 </div>
 
                 {/* Socials Bar */}
-                <div className="gtk-socials-anim pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+                <div className="gtk-socials-anim pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <span className="text-xs font-mono text-text-muted uppercase tracking-wider">
                         Socials
                     </span>
-                    <div className="flex flex-wrap gap-6 text-xs md:text-sm font-medium text-gray-400">
+                    <div className="flex flex-wrap gap-6 text-xs md:text-sm font-medium text-text-muted">
                         <a
                             href="https://github.com/khantpyaehtoo"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-amber-300 transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
+                            className="hover:text-primary transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
                         >
                             <i className="fa-brands fa-github text-sm"></i>
                             GitHub
@@ -236,7 +236,7 @@ export default function ContactSection() {
                             href="https://linkedin.com/in/khantpyaehtoo"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-amber-300 transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
+                            className="hover:text-primary transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
                         >
                             <i className="fa-brands fa-linkedin-in text-sm"></i>
                             LinkedIn
@@ -245,7 +245,7 @@ export default function ContactSection() {
                             href="https://facebook.com/khantpyae.00"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-amber-300 transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
+                            className="hover:text-primary transition-colors inline-flex items-center gap-2 hover:-translate-y-0.5 transform duration-200"
                         >
                             <i className="fa-brands fa-facebook-f text-sm"></i>
                             Facebook

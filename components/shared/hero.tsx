@@ -81,13 +81,13 @@ export default function Hero({ show }: { show?: boolean }) {
         <section
             id="home"
             ref={sectionRef}
-            className="w-full min-h-screen relative overflow-hidden bg-[#0a0a0a] flex items-center justify-center font-sans"
+            className="w-full min-h-screen relative overflow-hidden bg-bg-base flex items-center justify-center font-sans transition-colors duration-300"
         >
             {/* Base Subtle Radial Dots Background */}
             <div
                 className="absolute inset-0 pointer-events-none z-0"
                 style={{
-                    backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)`,
+                    backgroundImage: `radial-gradient(var(--border-subtle) 1.2px, transparent 1.2px)`,
                     backgroundSize: "24px 24px",
                 }}
             />
@@ -96,16 +96,16 @@ export default function Hero({ show }: { show?: boolean }) {
             <div
                 className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-300"
                 style={{
-                    backgroundImage: `radial-gradient(#f59e0b 1.5px, transparent 1.5px)`,
+                    backgroundImage: `radial-gradient(var(--primary) 1.5px, transparent 1.5px)`,
                     backgroundSize: "24px 24px",
                     WebkitMaskImage: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, black 0%, transparent 100%)`,
                     maskImage: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, black 0%, transparent 100%)`,
                 }}
             />
 
-            {/* Mouse Center Soft Ambient Amber Glow */}
+            {/* Mouse Center Soft Ambient Glow */}
             <div
-                className="absolute w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none z-0 transition-transform duration-75"
+                className="absolute w-72 h-72 bg-primary/10 rounded-full blur-3xl pointer-events-none z-0 transition-transform duration-75"
                 style={{
                     left: 0,
                     top: 0,
@@ -113,34 +113,34 @@ export default function Hero({ show }: { show?: boolean }) {
                 }}
             />
 
-            {/* Content Container (Centered Max-Width) */}
+            {/* Content Container */}
             <div
                 ref={contentRef}
                 className="w-full max-w-6xl mx-auto px-6 md:px-16 min-h-screen flex flex-col justify-center items-start opacity-0 invisible relative z-10 pt-20"
             >
                 <div className="space-y-6 max-w-4xl">
                     {/* Available Status Badge */}
-                    <div className="hero-animate inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="hero-animate inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                         <span>Available for full-time roles & projects</span>
                     </div>
 
                     {/* Subtitle / Intro */}
-                    <p className="hero-animate text-2xl md:text-3xl font-crafty text-amber-300 -rotate-1 origin-left">
+                    <p className="hero-animate text-2xl md:text-3xl font-crafty text-primary -rotate-1 origin-left">
                         Hi, It&apos;s me
                     </p>
 
                     {/* Main Name Heading */}
-                    <h1 className="hero-animate text-5xl sm:text-7xl md:text-8xl font-bold font-doppio tracking-tight text-white leading-none">
+                    <h1 className="hero-animate text-5xl sm:text-7xl md:text-8xl font-bold font-doppio tracking-tight text-text-main leading-none">
                         Khant Pyae Htoo
                     </h1>
 
                     {/* Title & Short Bio */}
                     <div className="hero-animate space-y-2">
-                        <p className="text-xl md:text-2xl font-medium text-gray-300">
+                        <p className="text-xl md:text-2xl font-medium text-text-main/80">
                             Front-End Developer
                         </p>
-                        <p className="text-sm md:text-base text-gray-400 max-w-xl leading-relaxed">
+                        <p className="text-sm md:text-base text-text-muted max-w-xl leading-relaxed">
                             Crafting performant web applications with React,
                             Next.js, and modern UI architectures. Focused on
                             smooth interactions and clean code.
@@ -149,20 +149,22 @@ export default function Hero({ show }: { show?: boolean }) {
 
                     {/* Action Buttons */}
                     <div className="hero-animate flex flex-wrap items-center gap-4 pt-4">
+                        {/* Primary Action Button */}
                         <a
                             href="#works"
                             onClick={handleScrollToWorks}
-                            className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95"
+                            className="bg-primary hover:opacity-90 text-bg-base  font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95 shadow-md"
                         >
                             View Selected Works
                             <i className="fa-solid fa-arrow-down text-xs"></i>
                         </a>
 
+                        {/* Secondary Action Button */}
                         <a
-                            href="/cv.pdf"
+                            href="/CV.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white/5 hover:bg-white/10 text-white border border-white/15 font-medium text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95"
+                            className="bg-bg-surface hover:bg-border-subtle text-text-main border border-border-subtle font-medium text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95 shadow-sm"
                         >
                             <i className="fa-solid fa-file-arrow-down text-xs"></i>
                             Download CV
@@ -171,8 +173,8 @@ export default function Hero({ show }: { show?: boolean }) {
                 </div>
 
                 {/* Bottom Scroll Indicator */}
-                <div className="hero-animate absolute bottom-8 left-6 md:left-16 flex items-center gap-3 text-xs font-mono text-gray-500 uppercase tracking-widest">
-                    <span className="w-8 h-[1px] bg-gray-700" />
+                <div className="hero-animate absolute bottom-8 left-6 md:left-16 flex items-center gap-3 text-xs font-mono text-text-muted uppercase tracking-widest">
+                    <span className="w-8 h-[1px] bg-border-subtle" />
                     Scroll Down
                 </div>
             </div>

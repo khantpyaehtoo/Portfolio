@@ -118,33 +118,33 @@ export default function GoodToKnowSection() {
         <section
             id="faq"
             ref={containerRef}
-            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 relative font-sans border-t border-white/5 z-10 overflow-hidden"
+            className="w-full bg-bg-base text-text-main px-6 md:px-16 py-28 relative font-sans border-t border-border-subtle z-10 overflow-hidden transition-colors duration-300"
         >
             {/* Background Grid */}
             <div
-                className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
+                className="absolute inset-0 opacity-[0.05] dark:opacity-[0.03] pointer-events-none -z-10"
                 style={{
-                    backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(var(--text-main) 1px, transparent 1px), linear-gradient(90deg, var(--text-main) 1px, transparent 1px)`,
                     backgroundSize: "40px 40px",
                 }}
             />
 
             {/* Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-500/10 rounded-full blur-[100px] md:blur-[120px] pointer-events-none -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] md:blur-[120px] pointer-events-none -z-10" />
 
             <div className="max-w-3xl mx-auto relative z-20">
                 <div className="text-center mb-16 space-y-2">
-                    <span className="faq-header-anim font-crafty text-amber-300 text-xl md:text-2xl -rotate-6 inline-block tracking-wide select-none">
+                    <span className="faq-header-anim font-crafty text-primary text-xl md:text-2xl -rotate-6 inline-block tracking-wide select-none">
                         questions?
                     </span>
-                    <h2 className="faq-header-anim text-4xl md:text-6xl font-bold tracking-tight text-white">
+                    <h2 className="faq-header-anim text-4xl md:text-6xl font-bold tracking-tight text-text-main">
                         Good to know
                     </h2>
                 </div>
 
                 <div
                     id="faq-container"
-                    className="divide-y divide-white/10 border-y border-white/10"
+                    className="divide-y divide-border-subtle border-y border-border-subtle"
                 >
                     {faqData.map((item, index) => {
                         const isOpen = openIndex === index;
@@ -153,7 +153,7 @@ export default function GoodToKnowSection() {
                             <div
                                 key={item.id}
                                 className={`faq-item-anim transition-colors duration-300 ${
-                                    isOpen ? "bg-white/[0.03]" : ""
+                                    isOpen ? "bg-bg-surface/50" : ""
                                 }`}
                             >
                                 <h3>
@@ -165,16 +165,16 @@ export default function GoodToKnowSection() {
                                             WebkitTapHighlightColor:
                                                 "transparent",
                                         }}
-                                        className="w-full py-6 px-4 md:px-6 flex justify-between items-center text-left hover:text-amber-300 transition-colors group focus:outline-none cursor-pointer touch-manipulation active:bg-white/5"
+                                        className="w-full py-6 px-4 md:px-6 flex justify-between items-center text-left hover:text-primary transition-colors group focus:outline-none cursor-pointer touch-manipulation active:bg-bg-surface"
                                     >
-                                        <span className="text-lg md:text-xl font-medium tracking-tight pr-4">
+                                        <span className="text-lg md:text-xl font-medium tracking-tight pr-4 text-text-main group-hover:text-primary transition-colors">
                                             {item.question}
                                         </span>
                                         <span
                                             className={`w-9 h-9 rounded-full flex items-center justify-center transition-transform duration-300 ease-out shrink-0 ${
                                                 isOpen
-                                                    ? "bg-amber-300 text-black rotate-180"
-                                                    : "bg-white/5 text-amber-300 border border-white/10"
+                                                    ? "bg-primary text-bg-base rotate-180"
+                                                    : "bg-bg-surface text-primary border border-border-subtle"
                                             }`}
                                         >
                                             <svg
@@ -214,7 +214,7 @@ export default function GoodToKnowSection() {
                                         opacity: index === 0 ? 1 : 0,
                                     }}
                                 >
-                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed pb-6 pr-6">
+                                    <p className="text-text-muted text-sm md:text-base leading-relaxed pb-6 pr-6">
                                         {index === 4 ? (
                                             <>
                                                 You can drop a message via the
@@ -222,7 +222,7 @@ export default function GoodToKnowSection() {
                                                 directly at{" "}
                                                 <a
                                                     href="mailto:khantpyaehtoo.dev@gmail.com"
-                                                    className="text-amber-300 underline underline-offset-4 hover:text-amber-200 transition-colors"
+                                                    className="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity font-medium"
                                                 >
                                                     khantpyaehtoo.dev@gmail.com
                                                 </a>

@@ -24,9 +24,21 @@ export default function Footer({ show }: FooterProps) {
 
             // Mobile Setup
             mm.add("(max-width: 767px)", () => {
-                gsap.set(footerRef.current, { autoAlpha: 1, y: 0 });
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: footerRef.current,
+                        start: "top 95%",
+                        end: "bottom top",
+                        toggleActions: "play reverse play reverse",
+                    },
+                });
 
-                gsap.fromTo(
+                tl.to(footerRef.current, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                }).fromTo(
                     containerRef.current,
                     { y: 30, opacity: 0 },
                     {
@@ -34,13 +46,8 @@ export default function Footer({ show }: FooterProps) {
                         opacity: 1,
                         duration: 0.8,
                         ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: footerRef.current,
-                            start: "top 95%",
-                            end: "bottom top",
-                            toggleActions: "play reverse play reverse",
-                        },
                     },
+                    "-=0.2",
                 );
             });
 
@@ -170,29 +177,29 @@ export default function Footer({ show }: FooterProps) {
     return (
         <footer
             ref={footerRef}
-            className="w-full bg-[#0a0a0a]  px-4 sm:px-6 md:px-16 pt-12 pb-8 opacity-100 visible translate-y-0 md:opacity-0 md:invisible md:translate-y-5 relative z-30 selection:bg-amber-300 selection:text-black"
+            className="w-full bg-bg-base px-4 sm:px-6 md:px-16 pt-12 pb-8 opacity-0 invisible translate-y-5 relative z-30 selection:bg-primary selection:text-black transition-colors duration-300"
         >
             <div className="max-w-5xl mx-auto relative">
                 {/* Main Card Container with Glassmorphism Styling */}
                 <div
                     ref={containerRef}
-                    className="bg-[#141517]/90 backdrop-blur-xl text-white p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-amber-300/20 transition-colors duration-500 shadow-2xl relative z-10 overflow-hidden"
+                    className="bg-bg-surface text-text-main p-6 sm:p-8 md:p-12 rounded-3xl border border-border-subtle hover:border-primary/30 transition-colors duration-500 shadow-2xl relative z-10 overflow-hidden"
                 >
                     {/* Background Subtle Ambient Glow */}
-                    <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
 
                     <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-10 relative z-10">
                         {/* Main Grid Content */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 flex-1">
                             {/* Brand Info */}
                             <div className="space-y-3 footer-item-anim">
-                                <h2 className="text-xl md:text-2xl font-bold tracking-tight text-white font-doppio">
+                                <h2 className="text-xl md:text-2xl font-bold tracking-tight text-text-main font-doppio">
                                     Khant Pyae Htoo
                                 </h2>
-                                <div className="text-gray-400 text-xs leading-relaxed space-y-2">
+                                <div className="text-text-muted text-xs leading-relaxed space-y-2">
                                     <p>
                                         &copy; 2026. Designed & Built by{" "}
-                                        <span className="font-mono text-amber-300 font-medium">
+                                        <span className="font-mono text-primary font-medium">
                                             Khant Pyae Htoo
                                         </span>
                                     </p>
@@ -203,7 +210,7 @@ export default function Footer({ show }: FooterProps) {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             aria-label="GitHub Repository"
-                                            className="hover:text-amber-300 text-gray-300 transition-colors inline-flex items-center"
+                                            className="hover:text-primary text-text-main transition-colors inline-flex items-center"
                                         >
                                             <i className="fa-brands fa-github text-base" />
                                         </a>
@@ -213,17 +220,17 @@ export default function Footer({ show }: FooterProps) {
 
                             {/* Quick Links */}
                             <div className="space-y-3 footer-item-anim">
-                                <h3 className="text-amber-300 font-mono text-xs uppercase tracking-widest">
+                                <h3 className="text-primary font-mono text-xs uppercase tracking-widest font-semibold">
                                     {"// Explore"}
                                 </h3>
-                                <ul className="space-y-2.5 text-gray-300 text-xs font-medium">
+                                <ul className="space-y-2.5 text-text-muted text-xs font-medium">
                                     <li>
                                         <a
                                             href="#works"
                                             onClick={(e) =>
                                                 handleScrollTo(e, "#works")
                                             }
-                                            className="hover:text-amber-300 transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
+                                            className="hover:text-primary transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
                                         >
                                             Work
                                         </a>
@@ -234,7 +241,7 @@ export default function Footer({ show }: FooterProps) {
                                             onClick={(e) =>
                                                 handleScrollTo(e, "#about")
                                             }
-                                            className="hover:text-amber-300 transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
+                                            className="hover:text-primary transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
                                         >
                                             About
                                         </a>
@@ -245,7 +252,7 @@ export default function Footer({ show }: FooterProps) {
                                             onClick={(e) =>
                                                 handleScrollTo(e, "#faq")
                                             }
-                                            className="hover:text-amber-300 transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
+                                            className="hover:text-primary transition-all hover:translate-x-1 inline-block cursor-pointer duration-200"
                                         >
                                             Q&A
                                         </a>
@@ -255,20 +262,20 @@ export default function Footer({ show }: FooterProps) {
 
                             {/* Contact & CV */}
                             <div className="space-y-3 footer-item-anim">
-                                <h3 className="text-amber-300 font-mono text-xs uppercase tracking-widest">
+                                <h3 className="text-primary font-mono text-xs uppercase tracking-widest font-semibold">
                                     {"// Get in touch"}
                                 </h3>
-                                <div className="space-y-2 text-gray-300 text-xs font-medium">
+                                <div className="space-y-2 text-text-muted text-xs font-medium">
                                     <a
                                         href="mailto:khantpyaehtoo.dev@gmail.com"
-                                        className="block hover:text-amber-300 transition-colors font-mono break-all"
+                                        className="block hover:text-primary transition-colors font-mono break-all"
                                     >
                                         khantpyaehtoo.dev@gmail.com
                                     </a>
                                     <a
                                         href="/CV.pdf"
                                         download="CV.pdf"
-                                        className="inline-flex items-center gap-1.5 text-amber-300 hover:text-amber-200 hover:underline pt-1 font-mono text-xs group cursor-pointer"
+                                        className="inline-flex items-center gap-1.5 text-primary hover:opacity-80 hover:underline pt-1 font-mono text-xs group cursor-pointer"
                                     >
                                         <span>Download CV</span>
                                         <i className="fa-solid fa-arrow-down text-[10px] group-hover:translate-y-0.5 transition-transform" />
@@ -278,7 +285,7 @@ export default function Footer({ show }: FooterProps) {
                         </div>
 
                         {/* Right Vertical Social & Scroll Top Bar */}
-                        <div className="flex md:flex-col items-center justify-center gap-3 pt-6 md:pt-0 md:pl-8 border-t md:border-t-0 md:border-l border-white/10 relative z-20">
+                        <div className="flex md:flex-col items-center justify-center gap-3 pt-6 md:pt-0 md:pl-8 border-t md:border-t-0 md:border-l border-border-subtle relative z-20">
                             {/* Scroll to Top Button */}
                             <a
                                 href="#top"
@@ -287,7 +294,7 @@ export default function Footer({ show }: FooterProps) {
                                 style={{
                                     WebkitTapHighlightColor: "transparent",
                                 }}
-                                className="footer-action-anim w-10 h-10 rounded-full bg-amber-300 text-black flex items-center justify-center hover:bg-amber-400 hover:scale-110 active:scale-90 transition-all duration-300 shadow-lg shadow-amber-300/10 hover:shadow-amber-300/30 cursor-pointer touch-manipulation select-none relative z-50"
+                                className="footer-action-anim w-10 h-10 rounded-full bg-primary text-bg-base flex items-center justify-center hover:opacity-90 hover:scale-110 active:scale-90 transition-all duration-300 shadow-lg shadow-primary/10 cursor-pointer touch-manipulation select-none relative z-50"
                             >
                                 <i className="fa-solid fa-arrow-up text-xs pointer-events-none" />
                             </a>
@@ -297,7 +304,7 @@ export default function Footer({ show }: FooterProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
-                                className="footer-action-anim w-10 h-10 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white hover:scale-105 transition-all active:scale-95"
+                                className="footer-action-anim w-10 h-10 rounded-full bg-bg-base border border-border-subtle text-text-muted flex items-center justify-center hover:text-primary hover:border-primary hover:scale-105 transition-all active:scale-95 shadow-sm"
                             >
                                 <i className="fa-brands fa-facebook-f text-xs" />
                             </a>
@@ -306,7 +313,7 @@ export default function Footer({ show }: FooterProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="GitHub"
-                                className="footer-action-anim w-10 h-10 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white hover:scale-105 transition-all active:scale-95"
+                                className="footer-action-anim w-10 h-10 rounded-full bg-bg-base border border-border-subtle text-text-muted flex items-center justify-center hover:text-primary hover:border-primary hover:scale-105 transition-all active:scale-95 shadow-sm"
                             >
                                 <i className="fa-brands fa-github text-xs" />
                             </a>
@@ -315,7 +322,7 @@ export default function Footer({ show }: FooterProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"
-                                className="footer-action-anim w-10 h-10 rounded-full bg-white/5 border border-white/10 text-gray-300 flex items-center justify-center hover:bg-white hover:text-black hover:border-white hover:scale-105 transition-all active:scale-95"
+                                className="footer-action-anim w-10 h-10 rounded-full bg-bg-base border border-border-subtle text-text-muted flex items-center justify-center hover:text-primary hover:border-primary hover:scale-105 transition-all active:scale-95 shadow-sm"
                             >
                                 <i className="fa-brands fa-linkedin-in text-xs" />
                             </a>
