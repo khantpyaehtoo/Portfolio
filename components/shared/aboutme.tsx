@@ -1,11 +1,66 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
+    const containerRef = useRef<HTMLElement>(null);
+
+    useGSAP(
+        () => {
+            // Title & Header Animation
+            gsap.from(".about-header-anim", {
+                scrollTrigger: {
+                    trigger: ".about-header-anim",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out",
+            });
+
+            // Story & Left Column Cards
+            gsap.from(".about-left-anim", {
+                scrollTrigger: {
+                    trigger: ".about-left-anim",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+            });
+
+            // Right Column Cards & System Log
+            gsap.from(".about-right-anim", {
+                scrollTrigger: {
+                    trigger: ".about-right-anim",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+            });
+        },
+        { scope: containerRef },
+    );
+
     return (
         <section
             id="about"
+            ref={containerRef}
             className="min-h-screen bg-[#0a0a0a] text-white px-6 md:px-16 py-24 font-sans border-t border-white/5 relative overflow-hidden"
         >
             {/* Subtle Ambient Background Glow */}
@@ -14,10 +69,10 @@ export default function AboutSection() {
             <div className="max-w-6xl mx-auto space-y-16 relative z-10">
                 {/* Header Title */}
                 <div className="space-y-2">
-                    <span className="text-amber-300 font-mono text-xs uppercase tracking-widest">
+                    <span className="about-header-anim block text-amber-300 font-mono text-xs uppercase tracking-widest">
                         {"// Who I Am"}
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight font-doppio uppercase text-white">
+                    <h1 className="about-header-anim text-5xl md:text-7xl font-extrabold tracking-tight font-doppio uppercase text-white">
                         About Me
                     </h1>
                 </div>
@@ -27,7 +82,7 @@ export default function AboutSection() {
                     {/* Left Column: Story & Values */}
                     <div className="space-y-12">
                         {/* My Story */}
-                        <div className="space-y-4">
+                        <div className="about-left-anim space-y-4">
                             <h2 className="text-2xl font-bold tracking-tight text-white">
                                 My Story
                             </h2>
@@ -62,7 +117,7 @@ export default function AboutSection() {
                         </div>
 
                         {/* Engineering Values */}
-                        <div className="space-y-4">
+                        <div className="about-left-anim space-y-4">
                             <h2 className="text-2xl font-bold tracking-tight text-white">
                                 Engineering Values
                             </h2>
@@ -77,7 +132,7 @@ export default function AboutSection() {
                                 ].map((value) => (
                                     <span
                                         key={value}
-                                        className="px-3.5 py-2 bg-[#141517] text-xs font-medium text-gray-300 rounded-lg border border-white/10 hover:border-amber-300/60 hover:text-white transition-all cursor-default select-none"
+                                        className="px-3.5 py-2 bg-[#141517] text-xs font-medium text-gray-300 rounded-lg border border-white/10 hover:border-amber-300/60 hover:text-white transition-all duration-300 hover:-translate-y-1 cursor-default select-none inline-block"
                                     >
                                         {value}
                                     </span>
@@ -89,7 +144,7 @@ export default function AboutSection() {
                     {/* Right Column: Tech Stack & System Log */}
                     <div className="space-y-12">
                         {/* Technologies */}
-                        <div className="space-y-6">
+                        <div className="about-right-anim space-y-6">
                             <h2 className="text-2xl font-bold tracking-tight text-white">
                                 Technologies that I use
                             </h2>
@@ -110,7 +165,7 @@ export default function AboutSection() {
                                     ].map((tech) => (
                                         <span
                                             key={tech}
-                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10"
+                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10 hover:border-amber-300/50 hover:text-amber-300 transition-colors"
                                         >
                                             {tech}
                                         </span>
@@ -133,7 +188,7 @@ export default function AboutSection() {
                                     ].map((tech) => (
                                         <span
                                             key={tech}
-                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10"
+                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10 hover:border-amber-300/50 hover:text-amber-300 transition-colors"
                                         >
                                             {tech}
                                         </span>
@@ -155,7 +210,7 @@ export default function AboutSection() {
                                     ].map((tech) => (
                                         <span
                                             key={tech}
-                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10"
+                                            className="px-3 py-1 bg-[#1f2023] text-xs font-medium rounded-full text-gray-300 border border-white/10 hover:border-amber-300/50 hover:text-amber-300 transition-colors"
                                         >
                                             {tech}
                                         </span>
@@ -165,7 +220,7 @@ export default function AboutSection() {
                         </div>
 
                         {/* System Log & Status */}
-                        <div className="space-y-4">
+                        <div className="about-right-anim space-y-4">
                             <h2 className="text-2xl font-bold tracking-tight text-white">
                                 System Log & Status
                             </h2>
@@ -188,9 +243,12 @@ export default function AboutSection() {
                                             </span>{" "}
                                             status --current
                                         </p>
-                                        <p className="text-emerald-400 pl-4 font-medium">
-                                            ➔ Open for Freelance & Collaborative
-                                            Projects
+                                        <p className="text-emerald-400 pl-4 font-medium flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                            <span>
+                                                ➔ Open for Freelance &
+                                                Collaborative Projects
+                                            </span>
                                         </p>
                                     </div>
 
