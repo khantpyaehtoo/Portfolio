@@ -18,6 +18,23 @@ export default function Navbar({ show }: { show?: boolean }) {
         { name: "Contact", href: "#contact", id: "contact" },
     ];
 
+    // Listen for Custom Active Section Event from GSAP ScrollTrigger
+    useEffect(() => {
+        const handleCustomActive = (e: Event) => {
+            const customEvent = e as CustomEvent<string>;
+            if (customEvent.detail) {
+                setActiveSection(customEvent.detail);
+            }
+        };
+
+        window.addEventListener("active-section-change", handleCustomActive);
+        return () =>
+            window.removeEventListener(
+                "active-section-change",
+                handleCustomActive,
+            );
+    }, []);
+
     // Mobile Menu Body Scroll handler
     useEffect(() => {
         if (isMobileMenuOpen) {
@@ -41,12 +58,12 @@ export default function Navbar({ show }: { show?: boolean }) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Active Section Intersection Observer
+    // Active Section Intersection Observer (For Normal Sections)
     useEffect(() => {
         const observerOptions = {
             root: null,
-            rootMargin: "-20% 0px -50% 0px",
-            threshold: 0.1,
+            rootMargin: "-30% 0px -40% 0px",
+            threshold: 0,
         };
 
         const observerCallback: IntersectionObserverCallback = (entries) => {

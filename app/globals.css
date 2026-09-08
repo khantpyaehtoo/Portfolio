@@ -39,7 +39,6 @@ header, button, a {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Mobile Touch Target Fix */
 @media (max-width: 767px) {
     button, a {
         touch-action: manipulation;
