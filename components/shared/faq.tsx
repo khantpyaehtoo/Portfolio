@@ -1,6 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FAQItem {
     id: string;
@@ -38,15 +43,82 @@ const faqData: FAQItem[] = [
 
 export default function GoodToKnowSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const containerRef = useRef<HTMLElement>(null);
+    const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+    // GSAP ScrollTrigger Entrance Animation
+    useGSAP(
+        () => {
+            // Header Entrance
+            gsap.from(".faq-header-anim", {
+                scrollTrigger: {
+                    trigger: ".faq-header-anim",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out",
+            });
+
+            // FAQ Items Sequential Stagger Entrance
+            gsap.from(".faq-item-anim", {
+                scrollTrigger: {
+                    trigger: "#faq-container",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.out",
+            });
+        },
+        { scope: containerRef },
+    );
+
+    // Dynamic Height & Content Fade GSAP Accordion Toggle Logic
     const toggleAccordion = (index: number) => {
-        setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+        const isClosing = openIndex === index;
+        const nextIndex = isClosing ? null : index;
+
+        // Close Currently Open Item
+        if (openIndex !== null && contentRefs.current[openIndex]) {
+            const currentEl = contentRefs.current[openIndex];
+            gsap.to(currentEl, {
+                height: 0,
+                opacity: 0,
+                duration: 0.35,
+                ease: "power2.inOut",
+            });
+        }
+
+        // Open Selected Item
+        if (!isClosing && contentRefs.current[index]) {
+            const nextEl = contentRefs.current[index];
+            gsap.fromTo(
+                nextEl,
+                { height: 0, opacity: 0 },
+                {
+                    height: "auto",
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: "power2.out",
+                },
+            );
+        }
+
+        setOpenIndex(nextIndex);
     };
 
     return (
         <section
             id="faq"
-            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 relative font-sans border-t border-white/5 z-10"
+            ref={containerRef}
+            className="w-full bg-[#0a0a0a] text-white px-6 md:px-16 py-28 relative font-sans border-t border-white/5 z-10 overflow-hidden"
         >
             {/* Background Grid */}
             <div
@@ -62,22 +134,25 @@ export default function GoodToKnowSection() {
 
             <div className="max-w-3xl mx-auto relative z-20">
                 <div className="text-center mb-16 space-y-2">
-                    <span className="font-crafty text-amber-300 text-xl md:text-2xl -rotate-6 inline-block tracking-wide select-none">
+                    <span className="faq-header-anim font-crafty text-amber-300 text-xl md:text-2xl -rotate-6 inline-block tracking-wide select-none">
                         questions?
                     </span>
-                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+                    <h2 className="faq-header-anim text-4xl md:text-6xl font-bold tracking-tight text-white">
                         Good to know
                     </h2>
                 </div>
 
-                <div className="divide-y divide-white/10 border-y border-white/10">
+                <div
+                    id="faq-container"
+                    className="divide-y divide-white/10 border-y border-white/10"
+                >
                     {faqData.map((item, index) => {
                         const isOpen = openIndex === index;
 
                         return (
                             <div
                                 key={item.id}
-                                className={`transition-colors duration-200 ${
+                                className={`faq-item-anim transition-colors duration-300 ${
                                     isOpen ? "bg-white/[0.03]" : ""
                                 }`}
                             >
@@ -96,14 +171,14 @@ export default function GoodToKnowSection() {
                                             {item.question}
                                         </span>
                                         <span
-                                            className={`w-9 h-9 rounded-full flex items-center justify-center transition-transform duration-200 shrink-0 ${
+                                            className={`w-9 h-9 rounded-full flex items-center justify-center transition-transform duration-300 ease-out shrink-0 ${
                                                 isOpen
                                                     ? "bg-amber-300 text-black rotate-180"
                                                     : "bg-white/5 text-amber-300 border border-white/10"
                                             }`}
                                         >
                                             <svg
-                                                className="w-3.5 h-3.5"
+                                                className="w-3.5 h-3.5 transition-transform duration-200"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
@@ -128,30 +203,37 @@ export default function GoodToKnowSection() {
                                     </button>
                                 </h3>
 
-                                {/* Direct Conditional Rendering - No CSS height transitions that can get stuck */}
-                                {isOpen && (
-                                    <div className="pb-6 px-4 md:px-6 animate-in fade-in duration-200">
-                                        <p className="text-gray-300 text-sm md:text-base leading-relaxed pr-6">
-                                            {index === 4 ? (
-                                                <>
-                                                    You can drop a message via
-                                                    the contact form above or
-                                                    email me directly at{" "}
-                                                    <a
-                                                        href="mailto:khantpyaehtoo.dev@gmail.com"
-                                                        className="text-amber-300 underline underline-offset-4 hover:text-amber-200 transition-colors"
-                                                    >
-                                                        khantpyaehtoo.dev@gmail.com
-                                                    </a>
-                                                    . I&apos;ll get back to you
-                                                    within 24-48 hours!
-                                                </>
-                                            ) : (
-                                                item.answer
-                                            )}
-                                        </p>
-                                    </div>
-                                )}
+                                {/* GSAP Animated Answer Container */}
+                                <div
+                                    ref={(el) => {
+                                        contentRefs.current[index] = el;
+                                    }}
+                                    className="overflow-hidden px-4 md:px-6"
+                                    style={{
+                                        height: index === 0 ? "auto" : 0,
+                                        opacity: index === 0 ? 1 : 0,
+                                    }}
+                                >
+                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed pb-6 pr-6">
+                                        {index === 4 ? (
+                                            <>
+                                                You can drop a message via the
+                                                contact form above or email me
+                                                directly at{" "}
+                                                <a
+                                                    href="mailto:khantpyaehtoo.dev@gmail.com"
+                                                    className="text-amber-300 underline underline-offset-4 hover:text-amber-200 transition-colors"
+                                                >
+                                                    khantpyaehtoo.dev@gmail.com
+                                                </a>
+                                                . I&apos;ll get back to you
+                                                within 24-48 hours!
+                                            </>
+                                        ) : (
+                                            item.answer
+                                        )}
+                                    </p>
+                                </div>
                             </div>
                         );
                     })}
