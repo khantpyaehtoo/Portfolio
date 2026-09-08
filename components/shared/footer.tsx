@@ -170,7 +170,7 @@ export default function Footer({ show }: FooterProps) {
     return (
         <footer
             ref={footerRef}
-            className="w-full bg-[#080808] px-4 sm:px-6 md:px-16 pt-12 pb-8 opacity-100 visible translate-y-0 md:opacity-0 md:invisible md:translate-y-5 relative z-30 selection:bg-amber-300 selection:text-black"
+            className="w-full bg-[#0a0a0a]  px-4 sm:px-6 md:px-16 pt-12 pb-8 opacity-100 visible translate-y-0 md:opacity-0 md:invisible md:translate-y-5 relative z-30 selection:bg-amber-300 selection:text-black"
         >
             <div className="max-w-5xl mx-auto relative">
                 {/* Main Card Container with Glassmorphism Styling */}
