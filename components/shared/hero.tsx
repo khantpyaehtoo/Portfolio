@@ -44,13 +44,46 @@ export default function Hero({ show }: { show?: boolean }) {
         { scope: sectionRef, dependencies: [show] },
     );
 
+    // Smooth Scroll Handler for Works Button
+    const handleScrollToWorks = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const targetElement = document.getElementById("works");
+
+        if (targetElement) {
+            const navbarOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition =
+                elementPosition + window.pageYOffset - navbarOffset;
+
+            if (
+                typeof window !== "undefined" &&
+                (
+                    window as unknown as {
+                        lenis?: { scrollTo: (target: number) => void };
+                    }
+                ).lenis
+            ) {
+                (
+                    window as unknown as {
+                        lenis?: { scrollTo: (target: number) => void };
+                    }
+                ).lenis?.scrollTo(offsetPosition);
+            } else {
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                });
+            }
+        }
+    };
+
     return (
         <section
             id="home"
             ref={sectionRef}
             className="w-full min-h-screen relative overflow-hidden bg-[#0a0a0a] flex items-center justify-center font-sans"
         >
-            {/* 1. Base Subtle Radial Dots Background (Full Screen) */}
+            {/* Base Subtle Radial Dots Background */}
             <div
                 className="absolute inset-0 pointer-events-none z-0"
                 style={{
@@ -59,7 +92,7 @@ export default function Hero({ show }: { show?: boolean }) {
                 }}
             />
 
-            {/* 2. Interactive Glowing Dots Follower (Full Screen) */}
+            {/* Interactive Glowing Dots Follower */}
             <div
                 className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-300"
                 style={{
@@ -70,7 +103,7 @@ export default function Hero({ show }: { show?: boolean }) {
                 }}
             />
 
-            {/* 3. Mouse Center Soft Ambient Amber Glow */}
+            {/* Mouse Center Soft Ambient Amber Glow */}
             <div
                 className="absolute w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none z-0 transition-transform duration-75"
                 style={{
@@ -118,7 +151,8 @@ export default function Hero({ show }: { show?: boolean }) {
                     <div className="hero-animate flex flex-wrap items-center gap-4 pt-4">
                         <a
                             href="#works"
-                            className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2"
+                            onClick={handleScrollToWorks}
+                            className="bg-amber-300 hover:bg-amber-400 text-black font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95"
                         >
                             View Selected Works
                             <i className="fa-solid fa-arrow-down text-xs"></i>
@@ -128,7 +162,7 @@ export default function Hero({ show }: { show?: boolean }) {
                             href="/cv.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white/5 hover:bg-white/10 text-white border border-white/15 font-medium text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2"
+                            className="bg-white/5 hover:bg-white/10 text-white border border-white/15 font-medium text-sm px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 cursor-pointer active:scale-95"
                         >
                             <i className="fa-solid fa-file-arrow-down text-xs"></i>
                             Download CV
