@@ -8,7 +8,7 @@ import IntroAnimation from "@/components/shared/introAnimation";
 import AboutSection from "@/components/shared/aboutme";
 import ContactSection from "@/components/shared/contact";
 import GoodToKnowSection from "@/components/shared/faq";
-import StickyWorkSection from "@/components/shared/work";
+import StickyWorkSection from "@/components/shared/works";
 
 export default function Home() {
     const [isIntroFinished, setIsIntroFinished] = useState(false);
